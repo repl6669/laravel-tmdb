@@ -50,7 +50,7 @@ abstract class Image implements Htmlable, Stringable
             'https://via.placeholder.com',
             $this->width(),
             $this->height(),
-            urlencode($this->alt)
+            urlencode($this->alt ?? '')
         );
     }
 

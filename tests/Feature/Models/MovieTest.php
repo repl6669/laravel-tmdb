@@ -67,9 +67,8 @@ it('movie provides a backdrop', function (): void {
 it('movie provides runtime', function (): void {
     $movie = Movie::query()->find(335983);
 
-    expect($movie->runtime())
-        ->toBeInstanceOf(CarbonInterval::class)
-        ->totalMinutes->toBe(112);
+    expect($movie->runtime())->toBeInstanceOf(CarbonInterval::class);
+    expect((int) $movie->runtime()->totalMinutes)->toBe(112);
 });
 
 it('movie has no runtime', function (): void {
