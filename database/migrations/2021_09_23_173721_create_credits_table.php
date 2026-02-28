@@ -6,7 +6,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+<<<<<<< HEAD
 return new class extends Migration
+=======
+return new class extends Migration
+>>>>>>> main
 {
     public function up(): void
     {
