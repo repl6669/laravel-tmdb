@@ -74,7 +74,7 @@ it('movie provides runtime', function (): void {
 });
 
 it('movie has no runtime', function (): void {
-    $movie = new Movie();
+    $movie = new Movie;
 
     expect($movie->runtime())->toBeNull();
 });

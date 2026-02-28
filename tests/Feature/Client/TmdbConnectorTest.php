@@ -6,7 +6,7 @@ use Astrotomic\Tmdb\Client\DTO\Collections\WatchProviderCollection;
 use Astrotomic\Tmdb\Client\DTO\Movie;
 use Astrotomic\Tmdb\Client\DTO\WatchProvider;
 use Astrotomic\Tmdb\Facades\Tmdb;
-use Sammyjo20\SaloonLaravel\Facades\Saloon;
+use Saloon\Http\Faking\MockClient;
 
 it('can retrieve collection details', function (): void {
     $collection = Tmdb::client()->collections()->getDetails(10);
@@ -14,9 +14,9 @@ it('can retrieve collection details', function (): void {
     expect($collection)
         ->toBeInstanceOf(Collection::class)
         ->parts
-            ->toBeInstanceOf(MovieCollection::class)
-            ->each->toBeInstanceOf(Movie::class);
-})->skip(fn () => ! Saloon::mockClient()->isMocking());
+        ->toBeInstanceOf(MovieCollection::class)
+        ->each->toBeInstanceOf(Movie::class);
+})->skip(fn () => MockClient::global()->isEmpty());
 
 it('can retrieve all movie watch providers', function (): void {
     $watchProviders = Tmdb::client()->watchProviders()->getMovieProviders();
@@ -24,7 +24,7 @@ it('can retrieve all movie watch providers', function (): void {
     expect($watchProviders)
         ->toBeInstanceOf(WatchProviderCollection::class)
         ->each->toBeInstanceOf(WatchProvider::class);
-})->skip(fn () => ! Saloon::mockClient()->isMocking());
+})->skip(fn () => MockClient::global()->isEmpty());
 
 it('can retrieve all tv watch providers', function (): void {
     $watchProviders = Tmdb::client()->watchProviders()->getTvProviders();
@@ -32,4 +32,4 @@ it('can retrieve all tv watch providers', function (): void {
     expect($watchProviders)
         ->toBeInstanceOf(WatchProviderCollection::class)
         ->each->toBeInstanceOf(WatchProvider::class);
-})->skip(fn () => ! Saloon::mockClient()->isMocking());
+})->skip(fn () => MockClient::global()->isEmpty());

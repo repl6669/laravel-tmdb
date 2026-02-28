@@ -11,11 +11,12 @@ use Illuminate\Support\LazyCollection;
 class NowPlaying extends Request
 {
     protected int $page = 1;
+
     protected ?string $region = null;
 
     public static function request(): static
     {
-        return new static();
+        return new static;
     }
 
     public function page(int $page): static

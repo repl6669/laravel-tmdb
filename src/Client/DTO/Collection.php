@@ -15,8 +15,7 @@ class Collection
         public ?string $posterPath,
         public ?string $backdropPath,
         public MovieCollection $parts,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

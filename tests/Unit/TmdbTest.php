@@ -3,7 +3,7 @@
 use Astrotomic\Tmdb\Tmdb;
 
 it('can use a given language', function (): void {
-    $tmdb = new Tmdb();
+    $tmdb = new Tmdb;
 
     $tmdb->useLanguage('de');
 
@@ -11,7 +11,7 @@ it('can use a given language', function (): void {
 });
 
 it('can use a given region', function (): void {
-    $tmdb = new Tmdb();
+    $tmdb = new Tmdb;
 
     $tmdb->useRegion('DE');
 
@@ -19,7 +19,7 @@ it('can use a given region', function (): void {
 });
 
 it('can run a callback with a given language', function (): void {
-    $tmdb = new Tmdb();
+    $tmdb = new Tmdb;
 
     $tmdb->useLanguage('en');
 
@@ -29,7 +29,7 @@ it('can run a callback with a given language', function (): void {
 });
 
 it('can run a callback with a given region', function (): void {
-    $tmdb = new Tmdb();
+    $tmdb = new Tmdb;
 
     $tmdb->useRegion('US');
 

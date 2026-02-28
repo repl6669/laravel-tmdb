@@ -4,7 +4,7 @@ namespace Tests;
 
 use Astrotomic\Tmdb\TmdbServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Sammyjo20\SaloonLaravel\SaloonServiceProvider;
+use Saloon\Laravel\SaloonServiceProvider;
 
 abstract class TestCase extends OrchestraTestCase
 {

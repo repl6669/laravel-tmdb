@@ -10,7 +10,7 @@ class ListAll extends Request
 {
     public static function request(): static
     {
-        return new static();
+        return new static;
     }
 
     public function send(): Response

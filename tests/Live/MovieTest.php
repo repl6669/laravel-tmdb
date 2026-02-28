@@ -4,9 +4,9 @@ use Astrotomic\PhpunitAssertions\ArrayAssertions;
 use Astrotomic\Tmdb\Enums\MovieStatus;
 use Astrotomic\Tmdb\Models\Movie;
 use Astrotomic\Tmdb\Models\MovieGenre;
+use Illuminate\Support\Facades\Http;
 use PHPUnit\Framework\Assert;
 use Spatie\Enum\Phpunit\EnumAssertions;
-use Illuminate\Support\Facades\Http;
 
 beforeEach(function (): void {
     $this->markTestSkipped('Live HTTP tests are disbaled by default.');

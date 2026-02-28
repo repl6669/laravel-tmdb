@@ -11,8 +11,7 @@ class WatchProvider
         public string $name,
         public int $displayPriority,
         public string $logoPath,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

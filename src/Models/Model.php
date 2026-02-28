@@ -8,22 +8,22 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
 
     public static function table(): string
     {
-        return (new static())->getTable();
+        return (new static)->getTable();
     }
 
     public static function morphType(): string
     {
-        return (new static())->getMorphClass();
+        return (new static)->getMorphClass();
     }
 
     public static function connection(): ?string
     {
-        return (new static())->getConnectionName();
+        return (new static)->getConnectionName();
     }
 
     public static function qualifiedColumn(string $column): string
     {
-        return (new static())->qualifyColumn($column);
+        return (new static)->qualifyColumn($column);
     }
 
     public function getConnectionName(): ?string

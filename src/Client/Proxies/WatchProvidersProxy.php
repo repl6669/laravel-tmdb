@@ -11,14 +11,14 @@ class WatchProvidersProxy extends Proxy
     public function getMovieProviders(): WatchProviderCollection
     {
         return $this->connector->send(
-            new GetMovieProvidersRequest()
+            new GetMovieProvidersRequest
         )->dto();
     }
 
     public function getTvProviders(): WatchProviderCollection
     {
         return $this->connector->send(
-            new GetTvProvidersRequest()
+            new GetTvProvidersRequest
         )->dto();
     }
 }

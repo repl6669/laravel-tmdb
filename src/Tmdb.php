@@ -8,6 +8,7 @@ use Closure;
 class Tmdb
 {
     protected string $region = 'US';
+
     protected ?string $language = null;
 
     public function useRegion(string $region): static

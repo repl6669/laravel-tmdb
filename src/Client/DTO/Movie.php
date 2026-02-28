@@ -23,8 +23,7 @@ class Movie
         public int $voteCount,
         public bool $adult,
         public bool $video,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $data): self
     {

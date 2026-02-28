@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Http;
 abstract class Request
 {
     protected PendingRequest $request;
+
     protected ?string $language = null;
+
     protected array $append = [];
 
     public function __construct()
@@ -47,6 +49,6 @@ abstract class Request
             return $this;
         }
 
-        throw new BadMethodCallException();
+        throw new BadMethodCallException;
     }
 }

@@ -39,7 +39,7 @@ class WatchProvider extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope(new OrderByDisplayPriority());
+        static::addGlobalScope(new OrderByDisplayPriority);
     }
 
     public static function all($columns = ['*']): EloquentCollection

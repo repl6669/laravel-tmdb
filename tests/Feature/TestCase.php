@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
-use Sammyjo20\SaloonLaravel\Facades\Saloon;
+use Saloon\Laravel\Facades\Saloon;
 use Symfony\Component\HttpFoundation\Response;
 
 abstract class TestCase extends \Tests\TestCase
@@ -64,7 +64,7 @@ abstract class TestCase extends \Tests\TestCase
             }
         }
 
-        /** @var \Sammyjo20\Saloon\Http\SaloonResponse $response */
+        /** @var \Saloon\Http\Response $response */
         foreach (Saloon::getRecordedResponses() as $response) {
             if ($response->successful()) {
                 $request = $response->getOriginalRequest();
