@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class MovieCollection extends Collection
 {
-    /** @var \Astrotomic\Tmdb\Client\DTO\Movie[] */
+    /** @var Movie[] */
     protected $items = [];
 
     public static function fromArray(array $data): self

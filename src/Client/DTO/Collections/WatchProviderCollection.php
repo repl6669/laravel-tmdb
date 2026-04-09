@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 
 class WatchProviderCollection extends Collection
 {
-    /** @var \Astrotomic\Tmdb\Client\DTO\WatchProvider[] */
+    /** @var WatchProvider[] */
     protected $items = [];
 
     public static function fromArray(array $data): self

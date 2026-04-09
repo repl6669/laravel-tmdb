@@ -2,14 +2,17 @@
 
 namespace Astrotomic\Tmdb\Models;
 
+use Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder;
 use Astrotomic\Tmdb\Eloquent\Builders\PersonBuilder;
 use Astrotomic\Tmdb\Enums\Gender;
 use Astrotomic\Tmdb\Images\Poster;
 use Astrotomic\Tmdb\Models\Concerns\HasTranslations;
 use Astrotomic\Tmdb\Requests\Person\Details;
 use Astrotomic\Tmdb\Requests\Person\Trending;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\LazyCollection;
 
 /**
@@ -17,9 +20,9 @@ use Illuminate\Support\LazyCollection;
  * @property string|null $name
  * @property bool $adult
  * @property string[]|null $also_known_as
- * @property \Carbon\Carbon|null $birthday
- * @property \Carbon\Carbon|null $deathday
- * @property \Astrotomic\Tmdb\Enums\Gender $gender
+ * @property Carbon|null $birthday
+ * @property Carbon|null $deathday
+ * @property Gender $gender
  * @property string|null $homepage
  * @property string|null $imdb_id
  * @property string|null $known_for_department
@@ -27,21 +30,25 @@ use Illuminate\Support\LazyCollection;
  * @property string|null $profile_path
  * @property float|null $popularity
  * @property string|null $biography
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read array $translations
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Credit[] $credits
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Credit[] $movie_credits
+ * @property-read EloquentCollection|Credit[] $credits
+ * @property-read EloquentCollection|Credit[] $movie_credits
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\PersonBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\PersonBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\PersonBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\PersonBuilder
+ * @mixin PersonBuilder
  */
 class Person extends Model
 {
     use HasTranslations;
+
+    public array $translatable = [
+        'biography',
+    ];
 
     protected $fillable = [
         'id',
@@ -70,10 +77,6 @@ class Person extends Model
         'popularity' => 'float',
     ];
 
-    public array $translatable = [
-        'biography',
-    ];
-
     public static function trending(?int $limit, string $window = 'day'): EloquentCollection
     {
         $ids = Trending::request(window: $window)
@@ -85,7 +88,7 @@ class Person extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany|\Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder
+     * @return MorphMany|CreditBuilder
      */
     public function credits(): HasMany
     {
@@ -93,7 +96,7 @@ class Person extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany|\Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder
+     * @return MorphMany|CreditBuilder
      */
     public function movie_credits(): HasMany
     {

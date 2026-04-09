@@ -6,6 +6,10 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
     public $incrementing = false;
 
+    abstract public function updateFromTmdb(?string $locale = null, array $with = []): bool;
+
+    abstract public function fillFromTmdb(array $data, ?string $locale = null): static;
+
     public static function table(): string
     {
         return (new static)->getTable();
@@ -40,8 +44,4 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
 
         return null;
     }
-
-    abstract public function updateFromTmdb(?string $locale = null, array $with = []): bool;
-
-    abstract public function fillFromTmdb(array $data, ?string $locale = null): static;
 }

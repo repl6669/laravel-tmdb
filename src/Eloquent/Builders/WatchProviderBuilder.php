@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class WatchProviderBuilder extends Builder
 {
-    /** @var \Astrotomic\Tmdb\Models\WatchProvider */
+    /** @var WatchProvider */
     protected $model;
 }

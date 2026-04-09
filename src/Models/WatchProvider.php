@@ -6,6 +6,7 @@ use Astrotomic\Tmdb\Eloquent\Builders\WatchProviderBuilder;
 use Astrotomic\Tmdb\Eloquent\Scopes\OrderByDisplayPriority;
 use Astrotomic\Tmdb\Images\Logo;
 use Astrotomic\Tmdb\Requests\WatchProvider\MovieListAll;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 
@@ -14,14 +15,14 @@ use Illuminate\Support\Collection;
  * @property string|null $name
  * @property string|null $logo_path
  * @property int $display_priority
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\WatchProviderBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\WatchProviderBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\WatchProviderBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\WatchProviderBuilder
+ * @mixin WatchProviderBuilder
  */
 class WatchProvider extends Model
 {
@@ -36,11 +37,6 @@ class WatchProvider extends Model
         'id' => 'int',
         'display_priority' => 'int',
     ];
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new OrderByDisplayPriority);
-    }
 
     public static function all($columns = ['*']): EloquentCollection
     {
@@ -98,5 +94,10 @@ class WatchProvider extends Model
     public function newEloquentBuilder($query): WatchProviderBuilder
     {
         return new WatchProviderBuilder($query);
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new OrderByDisplayPriority);
     }
 }

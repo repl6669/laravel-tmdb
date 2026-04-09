@@ -5,25 +5,30 @@ namespace Astrotomic\Tmdb\Models;
 use Astrotomic\Tmdb\Eloquent\Builders\TvGenreBuilder;
 use Astrotomic\Tmdb\Models\Concerns\HasTranslations;
 use Astrotomic\Tmdb\Requests\TvGenre\ListAll;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 
 /**
  * @property int $id
  * @property string|null $name
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read array $translations
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\TvGenreBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\TvGenreBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\TvGenreBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\TvGenreBuilder
+ * @mixin TvGenreBuilder
  */
 class TvGenre extends Model
 {
     use HasTranslations;
+
+    public array $translatable = [
+        'name',
+    ];
 
     protected $fillable = [
         'id',
@@ -32,10 +37,6 @@ class TvGenre extends Model
 
     protected $casts = [
         'id' => 'int',
-    ];
-
-    public array $translatable = [
-        'name',
     ];
 
     public static function all($columns = ['*']): EloquentCollection

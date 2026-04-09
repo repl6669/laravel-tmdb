@@ -16,16 +16,25 @@ abstract class Image implements Htmlable, Stringable
         protected ?string $alt = null,
     ) {}
 
+    public function __toString(): string
+    {
+        if (empty($this->path)) {
+            return $this->fallback();
+        }
+
+        return $this->url();
+    }
+
+    abstract public function width(): int;
+
+    abstract public function height(): int;
+
     public function size(?int $size): self
     {
         $this->size = $size;
 
         return $this;
     }
-
-    abstract public function width(): int;
-
-    abstract public function height(): int;
 
     public function url(): ?string
     {
@@ -52,15 +61,6 @@ abstract class Image implements Htmlable, Stringable
             $this->height(),
             urlencode($this->alt ?? '')
         );
-    }
-
-    public function __toString(): string
-    {
-        if (empty($this->path)) {
-            return $this->fallback();
-        }
-
-        return $this->url();
     }
 
     public function toHtml(): string

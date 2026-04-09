@@ -17,7 +17,7 @@ use InvalidArgumentException;
  */
 class CreditBuilder extends Builder
 {
-    /** @var \Astrotomic\Tmdb\Models\Credit */
+    /** @var Credit */
     protected $model;
 
     public function whereCreditType(CreditType $type): static
@@ -26,7 +26,7 @@ class CreditBuilder extends Builder
     }
 
     /**
-     * @param  class-string<\Astrotomic\Tmdb\Models\Model>  $model
+     * @param  class-string<Model>  $model
      * @return $this
      */
     public function whereMediaType(string $model): static

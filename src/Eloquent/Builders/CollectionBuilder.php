@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
  */
 class CollectionBuilder extends Builder
 {
-    /** @var \Astrotomic\Tmdb\Models\Collection */
+    /** @var Collection */
     protected $model;
 }

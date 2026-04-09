@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class MovieBuilder extends Builder
 {
-    /** @var \Astrotomic\Tmdb\Models\Movie */
+    /** @var Movie */
     protected $model;
 }

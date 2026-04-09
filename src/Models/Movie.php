@@ -19,6 +19,7 @@ use Astrotomic\Tmdb\Requests\Movie\TopRated;
 use Astrotomic\Tmdb\Requests\Movie\Trending;
 use Astrotomic\Tmdb\Requests\Movie\Upcoming;
 use Astrotomic\Tmdb\Requests\Movie\WatchProviders;
+use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,34 +39,42 @@ use Illuminate\Support\LazyCollection;
  * @property string|null $original_language
  * @property string|null $original_title
  * @property float|null $popularity
- * @property \Carbon\Carbon|null $release_date
+ * @property Carbon|null $release_date
  * @property int|null $runtime
  * @property float|null $vote_average
  * @property int $vote_count
  * @property string[]|null $production_countries
  * @property string[]|null $spoken_languages
- * @property \Astrotomic\Tmdb\Enums\MovieStatus|null $status
+ * @property MovieStatus|null $status
  * @property string|null $title
  * @property string|null $tagline
  * @property string|null $overview
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read array $translations
- * @property-read \Astrotomic\Tmdb\Models\Collection|null $collection
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\MovieGenre[] $genres
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Credit[] $credits
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Credit[] $cast
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Credit[] $crew
+ * @property-read Collection|null $collection
+ * @property-read EloquentCollection|MovieGenre[] $genres
+ * @property-read EloquentCollection|Credit[] $credits
+ * @property-read EloquentCollection|Credit[] $cast
+ * @property-read EloquentCollection|Credit[] $crew
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\MovieBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\MovieBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\MovieBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\MovieBuilder
+ * @mixin MovieBuilder
  */
 class Movie extends Model
 {
     use HasTranslations;
+
+    public array $translatable = [
+        'title',
+        'tagline',
+        'overview',
+        'poster_path',
+        'homepage',
+    ];
 
     protected $fillable = [
         'id',
@@ -108,14 +117,6 @@ class Movie extends Model
         'spoken_languages' => 'array',
         'status' => MovieStatus::class,
         'collection_id' => 'int',
-    ];
-
-    public array $translatable = [
-        'title',
-        'tagline',
-        'overview',
-        'poster_path',
-        'homepage',
     ];
 
     public static function popular(?int $limit): EloquentCollection
@@ -180,7 +181,7 @@ class Movie extends Model
 
     public function credits(): MorphManyCredits
     {
-        /** @var \Astrotomic\Tmdb\Models\Credit $instance */
+        /** @var Credit $instance */
         $instance = $this->newRelatedInstance(Credit::class);
 
         return new MorphManyCredits(

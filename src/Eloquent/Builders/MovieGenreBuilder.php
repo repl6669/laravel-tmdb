@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class MovieGenreBuilder extends Builder
 {
-    /** @var \Astrotomic\Tmdb\Models\MovieGenre */
+    /** @var MovieGenre */
     protected $model;
 }

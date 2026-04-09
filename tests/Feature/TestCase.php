@@ -45,7 +45,7 @@ abstract class TestCase extends \Tests\TestCase
     {
         foreach (Http::recorded() as $record) {
             /**
-             * @var \Illuminate\Http\Client\Request $request
+             * @var Request $request
              * @var \Illuminate\Http\Client\Response $response
              */
             [$request, $response] = $record;

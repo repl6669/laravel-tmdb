@@ -8,6 +8,7 @@ use Astrotomic\Tmdb\Images\Backdrop;
 use Astrotomic\Tmdb\Images\Poster;
 use Astrotomic\Tmdb\Models\Concerns\HasTranslations;
 use Astrotomic\Tmdb\Requests\Collection\Details;
+use Carbon\Carbon;
 
 /**
  * @property int $id
@@ -15,20 +16,26 @@ use Astrotomic\Tmdb\Requests\Collection\Details;
  * @property string|null $overview
  * @property string|null $backdrop_path
  * @property string|null $poster_path
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read array $translations
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Movie[] $movies
+ * @property-read \Illuminate\Database\Eloquent\Collection|Movie[] $movies
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\CollectionBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\CollectionBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\CollectionBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\CollectionBuilder
+ * @mixin CollectionBuilder
  */
 class Collection extends Model
 {
     use HasTranslations;
+
+    public array $translatable = [
+        'name',
+        'overview',
+        'poster_path',
+    ];
 
     protected $fillable = [
         'id',
@@ -42,15 +49,9 @@ class Collection extends Model
         'id' => 'int',
     ];
 
-    public array $translatable = [
-        'name',
-        'overview',
-        'poster_path',
-    ];
-
     public function movies(): HasManyMovies
     {
-        /** @var \Astrotomic\Tmdb\Models\Movie $instance */
+        /** @var Movie $instance */
         $instance = $this->newRelatedInstance(Movie::class);
 
         return new HasManyMovies(

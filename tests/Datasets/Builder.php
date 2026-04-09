@@ -17,7 +17,7 @@ dataset('Builder::find', function (): Generator {
         Credit::class => '5a30d4a40e0a264cbe180b27',
         TvGenre::class => 10751,
         WatchProvider::class => 8,
-        \Astrotomic\Tmdb\Models\Collection::class => 529892,
+        Astrotomic\Tmdb\Models\Collection::class => 529892,
     ];
 
     foreach ($set as $model => $id) {
@@ -33,7 +33,7 @@ dataset('Builder::findMany', function (): Generator {
         Credit::class => ['5a30d4a40e0a264cbe180b27', '5bb637c10e0a2633a7011036'],
         TvGenre::class => [10751, 10759],
         WatchProvider::class => [8, 9],
-        \Astrotomic\Tmdb\Models\Collection::class => [529892, 748],
+        Astrotomic\Tmdb\Models\Collection::class => [529892, 748],
     ];
 
     foreach ($set as $model => $ids) {
@@ -51,7 +51,7 @@ dataset('Builder::findMany@incomplete', function (): Generator {
         Credit::class => ['5a30d4a40e0a264cbe180b27', ''],
         TvGenre::class => [10751, 0],
         WatchProvider::class => [8, 0],
-        \Astrotomic\Tmdb\Models\Collection::class => [529892, 0],
+        Astrotomic\Tmdb\Models\Collection::class => [529892, 0],
     ];
 
     foreach ($set as $model => $ids) {
@@ -69,7 +69,7 @@ dataset('Builder::findMany@empty', function (): Generator {
         Credit::class => [],
         TvGenre::class => [],
         WatchProvider::class => [],
-        \Astrotomic\Tmdb\Models\Collection::class => [],
+        Astrotomic\Tmdb\Models\Collection::class => [],
     ];
 
     foreach ($set as $model => $ids) {

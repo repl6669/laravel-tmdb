@@ -15,19 +15,19 @@ abstract class TestCase extends OrchestraTestCase
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
-    protected function getPackageProviders($app): array
-    {
-        return [
-            SaloonServiceProvider::class,
-            TmdbServiceProvider::class,
-        ];
-    }
-
     public function getEnvironmentSetUp($app): void
     {
         config()->set('app.locale', 'de');
         config()->set('app.fallback_locale', 'en');
 
         config()->set('services.tmdb.token', env('TMDB_TOKEN'));
+    }
+
+    protected function getPackageProviders($app): array
+    {
+        return [
+            SaloonServiceProvider::class,
+            TmdbServiceProvider::class,
+        ];
     }
 }

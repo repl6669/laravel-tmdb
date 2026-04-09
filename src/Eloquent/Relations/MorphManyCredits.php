@@ -2,12 +2,13 @@
 
 namespace Astrotomic\Tmdb\Eloquent\Relations;
 
+use Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder;
 use Astrotomic\Tmdb\Requests\Movie\Credits;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 /**
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder
+ * @mixin CreditBuilder
  */
 class MorphManyCredits extends MorphMany
 {

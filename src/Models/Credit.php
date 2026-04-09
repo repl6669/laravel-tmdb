@@ -5,6 +5,7 @@ namespace Astrotomic\Tmdb\Models;
 use Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder;
 use Astrotomic\Tmdb\Enums\CreditType;
 use Astrotomic\Tmdb\Requests\Credit\Details;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Arr;
@@ -14,20 +15,20 @@ use Illuminate\Support\Arr;
  * @property int $person_id
  * @property string $media_type
  * @property int $media_id
- * @property \Astrotomic\Tmdb\Enums\CreditType $credit_type
+ * @property CreditType $credit_type
  * @property string|null $department
  * @property string|null $job
  * @property string|null $character
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
- * @property-read \Astrotomic\Tmdb\Models\Movie|\Astrotomic\Tmdb\Models\Model $media
- * @property-read \Astrotomic\Tmdb\Models\Person $person
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Movie|Model $media
+ * @property-read Person $person
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\CreditBuilder
+ * @mixin CreditBuilder
  */
 class Credit extends Model
 {

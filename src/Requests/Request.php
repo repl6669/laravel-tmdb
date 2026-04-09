@@ -8,7 +8,7 @@ use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 /**
- * @mixin \Illuminate\Http\Client\PendingRequest
+ * @mixin PendingRequest
  */
 abstract class Request
 {
@@ -25,6 +25,19 @@ abstract class Request
             ->withToken(config('services.tmdb.token'));
     }
 
+    public function __call(string $name, array $arguments): static
+    {
+        if (method_exists($this->request, $name)) {
+            call_user_func_array([$this->request, $name], $arguments);
+
+            return $this;
+        }
+
+        throw new BadMethodCallException;
+    }
+
+    abstract public function send(): Response;
+
     public function language(?string $language): static
     {
         $this->language = $language;
@@ -37,18 +50,5 @@ abstract class Request
         $this->append = $append;
 
         return $this;
-    }
-
-    abstract public function send(): Response;
-
-    public function __call(string $name, array $arguments): static
-    {
-        if (method_exists($this->request, $name)) {
-            call_user_func_array([$this->request, $name], $arguments);
-
-            return $this;
-        }
-
-        throw new BadMethodCallException;
     }
 }

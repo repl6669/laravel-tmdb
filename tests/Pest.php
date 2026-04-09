@@ -16,9 +16,10 @@ use Astrotomic\Tmdb\Models\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Pest\Expectation;
+use Tests\TestCase;
 
-uses(\Tests\Feature\TestCase::class)->in('Feature');
-uses(\Tests\TestCase::class)->in('Live');
+uses(Tests\Feature\TestCase::class)->in('Feature');
+uses(TestCase::class)->in('Live');
 
 /*
 |--------------------------------------------------------------------------

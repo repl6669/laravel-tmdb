@@ -5,6 +5,7 @@ namespace Astrotomic\Tmdb\Models;
 use Astrotomic\Tmdb\Eloquent\Builders\MovieGenreBuilder;
 use Astrotomic\Tmdb\Models\Concerns\HasTranslations;
 use Astrotomic\Tmdb\Requests\MovieGenre\ListAll;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
@@ -12,20 +13,24 @@ use Illuminate\Support\Collection;
 /**
  * @property int $id
  * @property string|null $name
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property-read array $translations
- * @property-read \Illuminate\Database\Eloquent\Collection|\Astrotomic\Tmdb\Models\Movie[] $movies
+ * @property-read EloquentCollection|Movie[] $movies
  *
  * @method \Astrotomic\Tmdb\Eloquent\Builders\MovieGenreBuilder newModelQuery()
  * @method \Astrotomic\Tmdb\Eloquent\Builders\MovieGenreBuilder newQuery()
  * @method static \Astrotomic\Tmdb\Eloquent\Builders\MovieGenreBuilder query()
  *
- * @mixin \Astrotomic\Tmdb\Eloquent\Builders\MovieGenreBuilder
+ * @mixin MovieGenreBuilder
  */
 class MovieGenre extends Model
 {
     use HasTranslations;
+
+    public array $translatable = [
+        'name',
+    ];
 
     protected $fillable = [
         'id',
@@ -34,10 +39,6 @@ class MovieGenre extends Model
 
     protected $casts = [
         'id' => 'int',
-    ];
-
-    public array $translatable = [
-        'name',
     ];
 
     public static function all($columns = ['*']): EloquentCollection

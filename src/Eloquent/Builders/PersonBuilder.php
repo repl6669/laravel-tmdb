@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Collection;
  */
 class PersonBuilder extends Builder
 {
-    /** @var \Astrotomic\Tmdb\Models\Person */
+    /** @var Person */
     protected $model;
 }
